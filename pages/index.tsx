@@ -1,7 +1,26 @@
 import PageContainer from "components/page-container";
 import {Client} from "pg"
+import useSWR from 'swr'
+
+const fetcher = (query)=>
+  fetch('/api/graphql',{
+    method: 'POST',
+    headers:{
+      'Content-type':'application/json'
+    },
+    body:JSON.stringify({query})
+  })
+    .then((res)=>res.json())
+    .then((json)=>json.data)
 
 const IndexPage=(props:any)=>{
+  const{data,error} = useSWR('{users {name}}',fetcher)
+
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Loading...</div>
+
+  console.log(data)
+  
   return (
     <PageContainer>
       <div>
