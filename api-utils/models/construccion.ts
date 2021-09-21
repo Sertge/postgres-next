@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes } from 'sequelize';
+import Predio from './predio';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Construccion = sequelize.define('Construccion',{
@@ -33,5 +34,7 @@ const Construccion = sequelize.define('Construccion',{
 },{
   tableName:'Construcciones'
 })
+
+Construccion.belongsTo(Predio)
 
 export default Construccion

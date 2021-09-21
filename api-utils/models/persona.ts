@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes } from 'sequelize';
+import Predio from './predio';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Persona = sequelize.define('Persona',{
@@ -85,5 +86,7 @@ const Persona = sequelize.define('Persona',{
 },{
   tableName:"Personas"
 })
+
+Persona.belongsToMany(Predio,{through:'Propietarios'})
 
 export default Persona
