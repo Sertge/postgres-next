@@ -1,14 +1,13 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import Predio from './predio';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Terreno = sequelize.define('Terreno',{
   id:{
-    type:DataTypes.UUIDV4,
+    type:DataTypes.INTEGER,
     primaryKey:true,
   },
   terrArea:{
-    type:DataTypes.NUMBER,
+    type:DataTypes.BIGINT,
     allowNull:false,
     validate:{
       isNumeric:{msg:'El campo "area del terreno" solo puede contener números'}
@@ -38,6 +37,6 @@ const Terreno = sequelize.define('Terreno',{
 {
   tableName:'Terrenos'
 })
-Terreno.belongsTo(Predio)
+
 
 export default Terreno

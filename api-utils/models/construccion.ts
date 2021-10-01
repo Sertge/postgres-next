@@ -1,14 +1,13 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import Predio from './predio';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Construccion = sequelize.define('Construccion',{
   id:{
-    type:DataTypes.UUIDV4,
+    type:DataTypes.INTEGER,
     primaryKey:true,
   },
   floorAmount:{
-    type:DataTypes.NUMBER,
+    type:DataTypes.BIGINT,
     allowNull:false,
     validate:{
       min:{args:[0],msg:'El campo "Número de pisos" no puede ser negativo'},
@@ -16,7 +15,7 @@ const Construccion = sequelize.define('Construccion',{
     }
   },
   totalArea:{
-    type:DataTypes.NUMBER,
+    type:DataTypes.BIGINT,
     allowNull:false,
     validate:{
       isNumeric:{msg:'El campo "area total" solo puede contener números'}
@@ -34,7 +33,5 @@ const Construccion = sequelize.define('Construccion',{
 },{
   tableName:'Construcciones'
 })
-
-Construccion.belongsTo(Predio)
 
 export default Construccion

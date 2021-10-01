@@ -1,8 +1,11 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import Predio from './predio';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Persona = sequelize.define('Persona',{
+  id:{
+    type:DataTypes.INTEGER,
+    primaryKey:true,
+  },
   docType:{
     type:DataTypes.ENUM,
     values:["CC","NIT"],
@@ -15,7 +18,7 @@ const Persona = sequelize.define('Persona',{
     }
   },
   docNumber:{
-    type:DataTypes.NUMBER,
+    type:DataTypes.BIGINT,
     allowNull:false,
     validate:{
       isNumeric:{msg:"Numbero de documento debe ser un valor numérico"}
@@ -78,15 +81,10 @@ const Persona = sequelize.define('Persona',{
       max:{msg:"Teléfono muy largo, use formato de 10 dígitos",args:[6999999999]},
       isNumeric:{msg:"Telefono inválido, incluya número en formato de 10 dígitos"}
     }
-  },
-  id:{
-    type:DataTypes.UUIDV4,
-    primaryKey:true,
-  }
+  }  
 },{
   tableName:"Personas"
 })
 
-Persona.belongsToMany(Predio,{through:'Propietarios'})
 
 export default Persona

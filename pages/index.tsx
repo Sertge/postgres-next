@@ -14,7 +14,7 @@ const fetcher = (query)=>
     .then((json)=>json.data)
 
 const IndexPage=(props:any)=>{
-  const{data,error} = useSWR('{users {name}}',fetcher)
+  const{data,error} = useSWR('{personas {name}}',fetcher)
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
@@ -46,9 +46,7 @@ const IndexPage=(props:any)=>{
 export async function getStaticProps(){
   const client = new Client({
     connectionString:process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
+    ssl: false
   })
   await client.connect();
   let {rows:resultVar}=await client.query({text:"SELECT 2+2"})

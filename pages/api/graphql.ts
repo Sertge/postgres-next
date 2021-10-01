@@ -1,23 +1,34 @@
 import {ApolloServer, gql} from 'apollo-server-micro'
 import { NextApiRequest, NextApiResponse } from 'next'
+import models,{dbsync} from 'api-utils/models'
 
 const typeDefs = gql`
   type Query {
-    users: [User!]!
+    personas: [Persona!]
   }
-  type User {
+  type Persona {
     name:String
   }
 `
 const resolvers = {
   Query:{
-    users(_parent:any,_args:any,_context:any){
-      return [{name:'Nextjs'}]
+    personas(_parent:any,_args:any,_context:any){
+      return [{name:_context.Persona.firstName}]
     }
   }
 }
-
-const apolloServer= new ApolloServer({typeDefs,resolvers})
+// console.log(models)
+const apolloServer= new ApolloServer({
+  typeDefs,
+  resolvers,
+  context:{
+    models
+  }
+  // consider adding auth
+  // context: ({ req }) => ({
+  //   authScope: getScope(req.headers.authorization)
+  // })
+})
 
 const startServer = apolloServer.start()
 
@@ -36,6 +47,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
     return false
   }
   
+  // await dbsync()
   await startServer
   await apolloServer.createHandler({
     path: '/api/graphql'

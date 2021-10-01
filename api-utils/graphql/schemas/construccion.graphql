@@ -1,0 +1,6 @@
+type Construccion {
+  floorAmount:number
+  totalArea:number
+  constructionUse:string
+  address:string
+}
