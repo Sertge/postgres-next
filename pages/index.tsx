@@ -1,58 +1,78 @@
 import PageContainer from "components/page-container";
-import {Client} from "pg"
-import useSWR from 'swr'
+import Link from "next/link";
+import { PageHeader, PageHeaderProps, Button } from "antd";
+import "antd/dist/antd.css";
+// import useSWR from 'swr'
 
-const fetcher = (query)=>
-  fetch('/api/graphql',{
-    method: 'POST',
-    headers:{
-      'Content-type':'application/json'
-    },
-    body:JSON.stringify({query})
-  })
-    .then((res)=>res.json())
-    .then((json)=>json.data)
+// const fetcher = (query:string)=>
+//   fetch('/api/graphql',{
+//     method: 'POST',
+//     headers:{
+//       'Content-type':'application/json'
+//     },
+//     body:JSON.stringify({query})
+//   })
+//     .then((res)=>res.json())
+//     .then((json)=>json.data)
 
-const IndexPage=(props:any)=>{
-  const{data,error} = useSWR('{personas{firstName}}',fetcher)
+const IndexPage = () => {
+  // const{data,error} = useSWR('{personas{docNumber}}',fetcher)
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+  // if (error) return <div>Failed to load</div>
+  // if (!data) return <div>Loading...</div>
 
-  console.log(data)
-  
+  // console.log(data)
+
+  const headerProps: PageHeaderProps = {
+    title: "Sistema de gestión de catastro",
+    subTitle:
+      "Página principal",
+    ghost: false,
+    className: "site-page-header",
+    extra: [
+      <Button key="1" type="primary">
+        Inicio
+      </Button>,
+      <Link href="predios-manager">
+        <a>
+          <Button key="2">Predios</Button>
+        </a>
+      </Link>,
+      <Link href="personas-manager">
+        <a>
+          <Button key="3">Propietarios</Button>
+        </a>
+      </Link>,
+      <Link href="about">
+        <a>
+          <Button key="4">Ayuda</Button>
+        </a>
+      </Link>,
+      <Button key="5">Salir</Button>,
+    ],
+    breadcrumb:{routes:[{path:'/',breadcrumbName:'inicio'}]}
+  };
+
   return (
     <PageContainer>
       <div>
-        <h1>This is the main page</h1>
-        <h2>Here we try to call something from PostgreSQL client</h2>
-        <p>Lets log it</p>
-        {props.resultVar.map((columns:{[key:string]:number},index:number)=>{
-          let theKey = Object.keys(columns)[0]
-          return(
-            <div key={index}>
-              <h3>{theKey}</h3>
-              <p>{columns[theKey]}</p>
-            </div>
-          )
-          
-        })}
-        <p>Yay, it worked!</p>
+        <PageHeader {...headerProps}></PageHeader>
+        <p>Desde aquí puede acceder a los siguientes subsistemas</p>
+        <ul>
+          <li>
+            <Link href="predios-manager">
+              <a>Administrador de predios</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="personas-manager">
+              <a>Administrador de propietarios</a>
+            </Link>
+          </li>
+        </ul>
       </div>
     </PageContainer>
-  )
-}
+  );
+};
 
-export async function getStaticProps(){
-  const client = new Client({
-    connectionString:process.env.DATABASE_URL,
-    ssl: false
-  })
-  await client.connect();
-  let {rows:resultVar}=await client.query({text:"SELECT 2+2"})
-  return {
-    props: {resultVar}
-  }
-}
-
-export default IndexPage
+export default IndexPage;
