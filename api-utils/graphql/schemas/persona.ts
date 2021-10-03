@@ -9,3 +9,19 @@ export const Persona =`type Persona{
   phoneNumber:Int
   lots:[Predio]
 }`
+
+export const DocTypeEnum = `type DocTypeEnum{
+  NIT
+  CC
+}`
+
+export const PersonaInput= `input PersonaInput {
+  docType:DocTypeEnum!
+  docNumber:Int!
+  email:String
+  address:String
+  phoneNumber:Int
+  firstName:String
+  lastName:String
+  compName:String
+}`

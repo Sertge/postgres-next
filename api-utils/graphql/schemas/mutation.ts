@@ -1,7 +1,6 @@
-export const TypeInput= `input TypeInput {
-    
-}`
-
-export type Mutation = `Mutation {
-
+export const Mutation = `type Mutation {
+  CreatePersona(PersonaInput):Persona
+  CreatePredio(PredioInput):Predio
+  CreateConstruccion(ConstruccionInput):Construccion
+  CreateTerreno(TerrenoInput):Terreno
 }`
