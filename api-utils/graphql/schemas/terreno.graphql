@@ -1,8 +1,0 @@
-type Terreno{
-  terrArea:number
-  terrValue:number
-  ubanOrRural:string
-  hasWaterSource:boolean
-  hasConstructions:boolean
-  lot:Predio
-}

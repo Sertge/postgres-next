@@ -25,7 +25,5 @@ Terreno.belongsTo(Predio)
 Construccion.belongsTo(Predio)
 Persona.belongsToMany(Predio,{through:'Propietarios'})
 
-
-
 export default sequelize.models
 export const dbsync=()=>sequelize.sync()

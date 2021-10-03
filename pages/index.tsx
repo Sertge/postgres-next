@@ -14,7 +14,7 @@ const fetcher = (query)=>
     .then((json)=>json.data)
 
 const IndexPage=(props:any)=>{
-  const{data,error} = useSWR('{personas {name}}',fetcher)
+  const{data,error} = useSWR('{personas{firstName}}',fetcher)
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
