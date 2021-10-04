@@ -10,7 +10,7 @@ export const Persona =`type Persona{
   lots:[Predio]
 }`
 
-export const DocTypeEnum = `type DocTypeEnum{
+export const DocTypeEnum = `enum DocTypeEnum{
   NIT
   CC
 }`
