@@ -3,3 +3,4 @@ export * from './terreno';
 export * from './predio';
 export * from './construccion';
 export * from './query';
+export * from './mutation'

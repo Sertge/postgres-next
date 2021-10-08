@@ -43,7 +43,7 @@ const PersonasManagerPage= ()=>{
     <PageContainer>
       <div>
         <CommonHeader/>
-        <Button type="primary" href='edit-persona'>Agregar un predio</Button>
+        <Button type="primary" href='edit-persona'>Agregar una persona</Button>
         {data
           ?<Table columns={columns} dataSource={data.personas}/>
           :<div>Loading...</div>

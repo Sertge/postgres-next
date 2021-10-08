@@ -16,17 +16,17 @@ const CommonHeader =()=>{
           </Button>
         </a>
       </Link>,
-      <Link href="predios-manager" key="2">
+      <Link href="/predios-manager" key="2">
         <a>
           <Button>Predios</Button>
         </a>
       </Link>,
-      <Link href="personas-manager" key="3">
+      <Link href="/personas-manager" key="3">
         <a>
           <Button>Propietarios</Button>
         </a>
       </Link>,
-      <Link href="about" key="4">
+      <Link href="/about" key="4">
         <a>
           <Button>Ayuda</Button>
         </a>

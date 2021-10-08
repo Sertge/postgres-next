@@ -16,6 +16,7 @@
   "dependencies": {
     "antd": "^4.16.13",
     "apollo-server-micro": "^3.3.0",
+    "axios": "^0.22.0",
     "graphql": "^15.5.3",
     "graphql-tools": "^8.2.0",
     "micro": "^9.3.4",

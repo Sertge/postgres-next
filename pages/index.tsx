@@ -1,7 +1,6 @@
 import PageContainer from "components/page-container";
 import CommonHeader from "components/common-header";
 import Link from "next/link";
-import { Button } from "antd";
 import "antd/dist/antd.css";
 
 const IndexPage = () => {

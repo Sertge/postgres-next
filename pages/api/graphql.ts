@@ -15,7 +15,8 @@ import {
   PersonaInput,
   PredioInput,
   TerrenoInput,
-  TerrenoSectorEnum
+  TerrenoSectorEnum,
+  Mutation
 } from "api-utils/graphql/schemas";
 
 const resolvers = {
@@ -29,12 +30,17 @@ const resolvers = {
     },
     predios(
       _parent: any,
-      _args: any,
+      _args: { [key: string]: any },
       context: { [key: string]: ModelCtor<Model<any, any>> }
     ) {
       return context.Predio.findAll();
     },
   },
+  Mutation:{
+    CreatePersona(_parent,args:{ [key: string]: any },context:{ [key: string]: ModelCtor<Model<any, any>> }){
+      return context.Persona.create(args)
+    }
+  }
 };
 
 // console.log(models)
@@ -51,7 +57,8 @@ const apolloServer = new ApolloServer({
     PersonaInput,
     PredioInput,
     TerrenoInput,
-    TerrenoSectorEnum
+    TerrenoSectorEnum,
+    Mutation
   ],
   resolvers,
   context: {
