@@ -1,6 +1,6 @@
 export const Mutation = `type Mutation {
-  CreatePersona(persona:PersonaInput):Persona
-  CreatePredio(predio:PredioInput):Predio
-  CreateConstruccion(construccion:ConstruccionInput):Construccion
-  CreateTerreno(terreno:TerrenoInput):Terreno
+  CreatePersona(input:PersonaInput):Persona
+  CreatePredio(input:PredioInput):Predio
+  CreateConstruccion(input:ConstruccionInput):Construccion
+  CreateTerreno(input:TerrenoInput):Terreno
 }`

@@ -1,5 +1,6 @@
-const queryFetcher = (query:string)=>
-  fetch('/api/graphql',{
+const queryFetcher = (query:string)=>{
+  console.log(query, 'the Query')
+  return fetch('/api/graphql',{
     method: 'POST',
     headers:{
       'Content-type':'application/json'
@@ -8,5 +9,5 @@ const queryFetcher = (query:string)=>
   })
     .then((res)=>res.json())
     .then((json)=>json.data)
-    
+}    
 export default queryFetcher 

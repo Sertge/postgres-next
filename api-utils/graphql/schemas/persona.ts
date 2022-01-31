@@ -1,4 +1,5 @@
 export const Persona =`type Persona{
+  id:ID
   docType:String!
   docNumber:Int!
   firstName:String

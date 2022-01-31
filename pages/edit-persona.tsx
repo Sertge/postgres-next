@@ -8,16 +8,25 @@ import axios from "axios";
 
 const formProps:FormProps={
   name:'personaform',
-  onFinish:(values)=>{console.log(values)},
+  onFinish:(values)=> {
+    values.docNumber = parseInt(values.docNumber)
+    values.phoneNumber = parseInt(values.phoneNumber)
+    values.firstName = values.firstName || null
+    values.lastName = values.lastName || null
+    values.compName = values.compName || null
+    const _payload = Object.keys(values).map(key => `${key}:${values[key]}`).join(',')
+    const query = `mutation{CreatePersona(input:{${_payload}){id,firstName}}`
+    axios.post('/api/graphql',{query}).catch((err)=>console.log(err))
+  },
   autoComplete:'off',
-  labelCol: { span: 3 },
-  wrapperCol: { span: 18 }
+  labelCol: { span: 5 },
+  wrapperCol: { span: 16 },
 }
 
 const PersonaEditorPage = ()=>{
   const router=useRouter()
   const theQuery=router.query.id
-  const query=`{persona(id:${theQuery}){docNumber}}`
+  const query=`{persona(id:${theQuery}){id,firstName,lastName,compName,docNumber}}`
   const data=axios.post(theQuery?'/api/graphql':null,{query}).then(res=>res).catch(()=>{})
   console.log(data)
   

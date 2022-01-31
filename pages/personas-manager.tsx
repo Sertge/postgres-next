@@ -8,12 +8,11 @@ import { Table,Button,Space } from "antd";
 
 
 const PersonasManagerPage= ()=>{
-  const{data,error} = useSWR('{personas{docNumber}}',queryFetcher)
+  const{data,error} = useSWR('{personas{id,firstName,lastName,compName}}',queryFetcher)
 
   if (error) return <div>Failed to load</div>
   // if (!data) return <div>Loading...</div>
 
-  console.log(data)
   const columns = [
     {
       tittle:'Nombre',

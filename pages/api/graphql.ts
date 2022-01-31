@@ -1,66 +1,94 @@
 import { ApolloServer } from "apollo-server-micro";
-import { NextApiRequest, NextApiResponse } from "next";
 import models /*,{dbsync}*/ from "api-utils/models";
-// import { makeExecutableSchema } from "graphql-tools";
-import { Model, ModelCtor } from "sequelize/types";
-import {
-  Construccion,
-  Persona,
-  Predio,
-  Query,
-  Terreno,
-  ConstruccionInput,
-  ConstructionUseEnum,
-  DocTypeEnum,
-  PersonaInput,
-  PredioInput,
-  TerrenoInput,
-  TerrenoSectorEnum,
-  Mutation
-} from "api-utils/graphql/schemas";
+import { schema } from "api-utils/graphql/schema";
+import { NextApiRequest, NextApiResponse } from "next";
+// import { Model, ModelCtor } from "sequelize/types";
+// import {
+//   Construccion,
+//   Persona,
+//   Predio,
+//   Query,
+//   Terreno,
+//   ConstruccionInput,
+//   ConstructionUseEnum,
+//   DocTypeEnum,
+//   PersonaInput,
+//   PredioInput,
+//   TerrenoInput,
+//   TerrenoSectorEnum,
+//   Mutation
+// } from "api-utils/graphql/schemas";
 
-const resolvers = {
-  Query: {
-    personas(
-      _parent: any,
-      _args: { [key: string]: any },
-      context: { [key: string]: ModelCtor<Model<any, any>> }
-    ) {
-      return context.Persona.findAll();
-    },
-    predios(
-      _parent: any,
-      _args: { [key: string]: any },
-      context: { [key: string]: ModelCtor<Model<any, any>> }
-    ) {
-      return context.Predio.findAll();
-    },
-  },
-  Mutation:{
-    CreatePersona(_parent,args:{ [key: string]: any },context:{ [key: string]: ModelCtor<Model<any, any>> }){
-      return context.Persona.create(args)
-    }
-  }
-};
+// const resolvers = {
+//   Query: {
+//     personas(
+//       _parent: any,
+//       _args: { [key: string]: any },
+//       context: { models: { [key: string]: ModelCtor<Model<any, any>> }}
+//     ) {
+//       const { models } = context 
+//       return models.Persona.findAll();
+//     },
+//     persona(_parent:any, {id}:{id:string}, context: { models: { [key: string]: ModelCtor<Model<any, any>> }}) {
+//       const { models } = context 
+//       return models.Persona.findByPk(+id)
+//     },
+//     predios(
+//       _parent: any,
+//       _args: { [key: string]: any },
+//       context: { models: { [key: string]: ModelCtor<Model<any, any>> }}
+//     ) {
+//       const { models } = context 
+//       return models.Predio.findAll();
+//     },
+//   },
+//   Mutation:{
+//     CreatePersona(_parent,args:{ [key: string]: any },context: { models: { [key: string]: ModelCtor<Model<any, any>> }}){
+//       console.log(args)
+//       const { models } = context 
+//       const { input: {
+//         docType,
+//         docNumber,
+//         firstName,
+//         lastName,
+//         compName,
+//         email,
+//         address,
+//         phoneNumber
+//       }} = args
+//       return models.Persona.create({
+//         docType,
+//         docNumber,
+//         firstName,
+//         lastName,
+//         compName,
+//         email,
+//         address,
+//         phoneNumber
+//       })
+//     }
+//   }
+// };
 
 // console.log(models)
 const apolloServer = new ApolloServer({
-  typeDefs: [
-    Persona,
-    Terreno,
-    Construccion,
-    Predio,
-    Query,
-    ConstruccionInput,
-    ConstructionUseEnum,
-    DocTypeEnum,
-    PersonaInput,
-    PredioInput,
-    TerrenoInput,
-    TerrenoSectorEnum,
-    Mutation
-  ],
-  resolvers,
+  // typeDefs: [
+  //   Persona,
+  //   Terreno,
+  //   Construccion,
+  //   Predio,
+  //   Query,
+  //   ConstruccionInput,
+  //   ConstructionUseEnum,
+  //   DocTypeEnum,
+  //   PersonaInput,
+  //   PredioInput,
+  //   TerrenoInput,
+  //   TerrenoSectorEnum,
+  //   Mutation
+  // ],
+  // resolvers,
+  schema,
   context: {
     models,
   },
@@ -69,6 +97,8 @@ const apolloServer = new ApolloServer({
   //   authScope: getScope(req.headers.authorization)
   // })
 });
+
+// export default apolloServer.createHandler({ path: '/api/graphql' })
 
 const startServer = apolloServer.start();
 
