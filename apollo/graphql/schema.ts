@@ -1,4 +1,4 @@
-import { makeExecutableSchema } from "graphql-tools";
+import { resolvers } from 'apollo/graphql/resolvers'
 import {
   Construccion,
   Persona,
@@ -13,11 +13,9 @@ import {
   TerrenoInput,
   TerrenoSectorEnum,
   Mutation
-} from "api-utils/graphql/schemas";
+} from "apollo/graphql/schemas";
 
-import { resolvers } from 'api-utils/graphql/resolvers'
-
-export const schema = makeExecutableSchema({
+export const schema = {
   typeDefs: [
     Construccion,
     Persona,
@@ -34,4 +32,4 @@ export const schema = makeExecutableSchema({
     Mutation
   ],
   resolvers
-})
+}
