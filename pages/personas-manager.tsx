@@ -1,17 +1,35 @@
 import PageContainer from "components/page-container";
 import CommonHeader from "components/common-header";
+import ClientOnly from "components/ClientOnly";
 import "antd/dist/antd.css";
 import Link from 'next/link'
-import useSWR from 'swr'
-import queryFetcher from "api-utils/fetchers/query-fetcher";
-import { Table,Button,Space } from "antd";
+import { Table, Button, Space } from "antd";
+import { useRouter } from "next/router";
+import { gql, useQuery } from "@apollo/client";
+import { useEffect } from "react";
 
+const personasQuery = gql`
+  query {
+    personas {
+      id
+      firstName
+      lastName
+      compName
+    }
+  }
+`
 
 const PersonasManagerPage= ()=>{
-  const{data,error} = useSWR('{personas{id,firstName,lastName,compName}}',queryFetcher)
+  const router = useRouter()
+  const { data, loading, error } = useQuery(personasQuery)
+  const shouldRedirect = !(loading || error || data)
 
-  if (error) return <div>Failed to load</div>
-  // if (!data) return <div>Loading...</div>
+  useEffect(() => {
+    if (shouldRedirect) {
+      router.push('/')
+    }
+  },[shouldRedirect])
+  if (error) return <div>{error.message}</div>
 
   const columns = [
     {
@@ -40,14 +58,14 @@ const PersonasManagerPage= ()=>{
 
   return (
     <PageContainer>
-      <div>
+      <ClientOnly>
         <CommonHeader/>
         <Button type="primary" href='edit-persona'>Agregar una persona</Button>
         {data
           ?<Table columns={columns} dataSource={data.personas}/>
           :<div>Loading...</div>
         }
-      </div>
+      </ClientOnly>
     </PageContainer>
   )
 }
