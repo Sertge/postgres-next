@@ -1,4 +1,6 @@
 import { resolvers } from 'apollo/graphql/resolvers'
+import { makeExecutableSchema } from '@graphql-tools/schema';
+
 import {
   Construccion,
   Persona,
@@ -15,7 +17,7 @@ import {
   Mutation
 } from "apollo/graphql/schemas";
 
-export const schema = {
+export const schema = makeExecutableSchema({
   typeDefs: [
     Construccion,
     Persona,
@@ -32,4 +34,4 @@ export const schema = {
     Mutation
   ],
   resolvers
-}
+})
