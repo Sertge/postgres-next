@@ -1,17 +1,18 @@
 import PageContainer from "components/common/page-container";
 import CommonHeader from "components/common/common-header";
 import ClientOnly from "components/common/ClientOnly";
-import PersonasManagerComponent from "components/personas/personas-manager";
+import PersonaEditorComponent from "components/personas/persona-edit";
 
-const PersonasManagerPage= ()=>{
+
+const PersonasEditorPage= ()=>{
   return (
     <PageContainer>
       <ClientOnly>
         <CommonHeader/>
-          <PersonasManagerComponent />
+          <PersonaEditorComponent />
       </ClientOnly>
     </PageContainer>
   )
 }
 
-export default PersonasManagerPage
+export default PersonasEditorPage

@@ -1,5 +1,5 @@
-import PageContainer from "components/page-container";
-import CommonHeader from "components/common-header";
+import PageContainer from "components/common/page-container";
+import CommonHeader from "components/common/common-header";
 import Link from "next/link";
 import "antd/dist/antd.css";
 

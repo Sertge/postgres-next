@@ -1,38 +1,60 @@
-import PageContainer from "components/page-container";
-import CommonHeader from "components/common-header";
 import "antd/dist/antd.css";
 // import Link from 'next/link'
 import {useRouter} from 'next/router'
 import { Button,Form, FormProps, Input,Select } from "antd";
-import axios from "axios";
+import { gql, useMutation, useQuery } from "@apollo/client";
+// import { useState } from "react";
+
+const createPersonaMutation = gql`
+  mutation {
+    createPersona(input: $input){
+      id,
+      firstName,
+      lastName
+    }
+  }
+`
+
+const personaQuery = gql`
+  query personaQuery($id:ID!) {
+    persona(id: $id){
+      id,
+      firstName,
+      lastName,
+      compName
+    }
+  }
+`
 
 const formProps:FormProps={
   name:'personaform',
-  onFinish:(values)=> {
-    values.docNumber = parseInt(values.docNumber)
-    values.phoneNumber = parseInt(values.phoneNumber)
-    values.firstName = values.firstName || null
-    values.lastName = values.lastName || null
-    values.compName = values.compName || null
-    const _payload = Object.keys(values).map(key => `${key}:${values[key]}`).join(',')
-    const query = `mutation{CreatePersona(input:{${_payload}){id,firstName}}`
-    axios.post('/api/graphql',{query}).catch((err)=>console.log(err))
+  onFinish:async (input)=> {
+    input.docNumber = parseInt(input.docNumber)
+    input.phoneNumber = parseInt(input.phoneNumber)
+    input.firstName = input.firstName || null
+    input.lastName = input.lastName || null
+    input.compName = input.compName || null
+    const [personaMutation] = useMutation(createPersonaMutation)
+    const { data } = await personaMutation({
+      variables: {
+        input
+      }
+    })
+    if (!data) throw new Error('something went wrong')
   },
   autoComplete:'off',
   labelCol: { span: 5 },
   wrapperCol: { span: 16 },
 }
 
-const PersonaEditorPage = ()=>{
+const PersonaEditorComponent = ()=>{
   const router=useRouter()
   const theQuery=router.query.id
-  const query=`{persona(id:${theQuery}){id,firstName,lastName,compName,docNumber}}`
-  const data=axios.post(theQuery?'/api/graphql':null,{query}).then(res=>res).catch(()=>{})
+  const { data } = useQuery(personaQuery, {variables: {id: theQuery}})
   console.log(data)
   
   return (
-    <PageContainer>
-      <CommonHeader/>
+    <>
       <Form {...formProps}>
         <Form.Item label="Nombres" name="firstName"><Input/></Form.Item>
         <Form.Item label="Apellidos" name="lastName"><Input/></Form.Item>
@@ -49,8 +71,8 @@ const PersonaEditorPage = ()=>{
         <Form.Item label="Teléfono" name="phoneNumber"><Input/></Form.Item>
         <Form.Item><Button type="primary" htmlType="submit">Guardar</Button></Form.Item>
       </Form>
-    </PageContainer>
+    </>
   )
 }
 
-export default PersonaEditorPage
+export default PersonaEditorComponent

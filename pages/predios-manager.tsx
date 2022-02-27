@@ -1,16 +1,31 @@
-import PageContainer from "components/page-container";
-import CommonHeader from "components/common-header";
+import PageContainer from "components/common/page-container";
+import CommonHeader from "components/common/common-header";
 import "antd/dist/antd.css";
-import useSWR from 'swr'
-import queryFetcher from "api-utils/fetchers/query-fetcher";
 import { Table,Button, Space } from "antd";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { gql, useQuery } from "@apollo/client";
+import { useEffect } from "react";
+
+const prediosQuery = gql`
+  query predios {
+    id,
+    lotName,
+    lotValue
+  }
+`
 
 const PrediosManagerPage = ()=>{
-  const{data,error} = useSWR('{predios{lotName, lotValue}}',queryFetcher)
+  const router = useRouter()
+  const { data, loading, error } = useQuery(prediosQuery)
+  const shouldRedirect = !(loading || error || data)
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return 
+  useEffect(() => {
+    if (shouldRedirect) {
+      router.push('/')
+    }
+  },[shouldRedirect])
+  if (error) return <div>{error.message}</div>
 
   console.log(data)
   const columns = [

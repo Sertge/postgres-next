@@ -1,4 +1,4 @@
-import PageContainer from 'components/page-container'
+import PageContainer from 'components/common/page-container'
 import getiQl from 'components/graphiql';
 import { useEffect } from 'react';
 
