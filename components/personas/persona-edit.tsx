@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import {useRouter} from 'next/router'
 import { Button,Form, FormProps, Input,Select } from "antd";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { useEffect, useRef } from "react";
 // import { useState } from "react";
 
 const createPersonaMutation = gql`
@@ -51,11 +52,16 @@ const PersonaEditorComponent = ()=>{
   const router=useRouter()
   const theQuery=router.query.id
   const { data } = useQuery(personaQuery, {variables: {id: theQuery}})
-  console.log(data)
+  const form = useRef(null)
+
+  useEffect(()=> {
+    if(data && data.persona)
+    form.current.setFieldsValue(data.persona)
+  },[data])
   
   return (
     <>
-      <Form {...formProps}>
+      <Form initialValues={data?.persona} {...formProps} ref={form}>
         <Form.Item label="Nombres" name="firstName"><Input/></Form.Item>
         <Form.Item label="Apellidos" name="lastName"><Input/></Form.Item>
         <Form.Item label="Tipo de documento" name="docType">
