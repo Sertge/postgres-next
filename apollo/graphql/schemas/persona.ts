@@ -1,13 +1,13 @@
 export const Persona =`type Persona{
   id:ID
   docType:String!
-  docNumber:Int!
+  docNumber:Float!
   firstName:String
   lastName:String
   compName:String
   email:String
   address:String
-  phoneNumber:Int
+  phoneNumber:Float
   lots:[Predio]
 }`
 
@@ -17,11 +17,12 @@ export const DocTypeEnum = `enum DocTypeEnum{
 }`
 
 export const PersonaInput= `input PersonaInput {
+  id:ID
   docType:DocTypeEnum!
-  docNumber:Int!
+  docNumber:Float!
   email:String
   address:String
-  phoneNumber:Int
+  phoneNumber:Float
   firstName:String
   lastName:String
   compName:String

@@ -4,6 +4,7 @@ import { Table, Button, Space } from "antd";
 import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
 import { useEffect } from "react";
+import { ColumnsType } from "antd/lib/table";
 
 const personasQuery = gql`
   query {
@@ -28,24 +29,24 @@ const PersonasManagerComponent= ()=>{
   },[shouldRedirect])
   if (error) return <div>{error.message}</div>
 
-  const columns = [
+  const columns: ColumnsType = [
     {
-      tittle:'Nombre',
+      title:'Nombre',
       dataIndex:'firstName',
       key:'firstName'
     },
     {
-      tittle:'Apellido',
+      title:'Apellido',
       dataIndex:'lastName',
       key:'lastName'
     },
     {
-      tittle:'Razón social',
+      title:'Razón social',
       dataIndex:'compName',
       key:'compName'
     },
     {
-      tittle:'Acciones',
+      title:'Acciones',
       key:'Actions',
       render:(_text:string,record:any)=>(<Space size='middle'>
         <Link href={`persona-edit?id=${record.id}`}><a>Editar Registro</a></Link>
@@ -55,7 +56,7 @@ const PersonasManagerComponent= ()=>{
 
   return (
     <>
-      <Button type="primary" href='edit-persona'>Agregar una persona</Button>
+      <Button type="primary" href='persona-edit'>Agregar una persona</Button>
       {data
         ?<Table columns={columns} dataSource={data.personas}/>
         :<div>Loading...</div>
