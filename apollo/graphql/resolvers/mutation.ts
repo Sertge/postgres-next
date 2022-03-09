@@ -1,6 +1,6 @@
 import { Model, ModelCtor } from "sequelize/types";
 export const Mutation = {
-    async CreatePersona(_parent,args:{ [key: string]: any },context: { models: { [key: string]: ModelCtor<Model<any, any>> }}){
+    async CreatePersona(_parent,args: { [key: string]: any },context: { models: { [key: string]: ModelCtor<Model<any, any>> }}){
       const { models } = context 
       const { input: {
         id,
@@ -24,7 +24,7 @@ export const Mutation = {
           address,
           phoneNumber
         }, {
-          where:{ id },
+          where: { id },
           returning: true
         })
         return updatedPersona[1][0]
@@ -43,8 +43,7 @@ export const Mutation = {
         {
           returning:true
         }
-      ).catch(err => console.log(err))
-      console.log(createdPersona, 'createdModel')
-      return createdPersona
+      )
+      return createdPersona.toJSON()
     }
   }

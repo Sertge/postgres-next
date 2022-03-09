@@ -1,5 +1,5 @@
 import "antd/dist/antd.css";
-// import Link from 'next/link'
+import Link from 'next/link'
 import {useRouter} from 'next/router'
 import { Button,Form, FormProps, Input,Select, InputNumber } from "antd";
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -81,6 +81,7 @@ const PersonaEditorComponent = ()=>{
     })
     if (!data) throw new Error('something went wrong')
     form.current.setFieldsValue(data.CreatePersona)
+    router.push('personas-manager')
   }
 
   return (
@@ -99,7 +100,7 @@ const PersonaEditorComponent = ()=>{
         <Form.Item label="Correo electrónico" name="email"><Input/></Form.Item>
         <Form.Item label="Dirección" name="address"><Input/></Form.Item>
         <Form.Item label="Teléfono" name="phoneNumber" ><InputNumber/></Form.Item>
-        <Form.Item><Button type="primary" htmlType="submit">Guardar</Button></Form.Item>
+        <Form.Item><Button type="primary" htmlType="submit">Guardar</Button><Link href='personas-manager'><a><Button>Regresar</Button></a></Link></Form.Item>
       </Form>
     </>
   )
