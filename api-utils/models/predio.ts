@@ -2,10 +2,6 @@ import { Sequelize, DataTypes } from 'sequelize';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Predio = sequelize.define('Predio',{
-  id:{
-    type:DataTypes.INTEGER,
-    primaryKey:true,
-  },
   lotValue:{
     type:DataTypes.BIGINT,
     allowNull:false,

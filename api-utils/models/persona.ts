@@ -2,10 +2,6 @@ import { Sequelize, DataTypes } from 'sequelize';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Persona = sequelize.define('Persona',{
-  id:{
-    type:DataTypes.INTEGER,
-    primaryKey:true,
-  },
   docType:{
     type:DataTypes.ENUM,
     values:["CC","NIT"],

@@ -2,10 +2,6 @@ import { Sequelize, DataTypes } from 'sequelize';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Terreno = sequelize.define('Terreno',{
-  id:{
-    type:DataTypes.INTEGER,
-    primaryKey:true,
-  },
   terrArea:{
     type:DataTypes.BIGINT,
     allowNull:false,

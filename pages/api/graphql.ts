@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro'
 import { schema } from  'apollo/graphql/schema'
 import Cors from 'micro-cors'
-import models from 'api-utils/models'
+import models/*, { dbsync }*/ from 'api-utils/models'
 
 const cors = Cors()
 const apolloServer = new ApolloServer({ 
@@ -17,6 +17,7 @@ export const config = {
   },
 }
 
+// dbsync()
 const startServer = apolloServer.start()
 
 export default cors(

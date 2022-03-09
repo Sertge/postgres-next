@@ -14,7 +14,7 @@ export const Mutation = {
         phoneNumber
       }} = args
       if(id) {
-        const updatedModel = await models.Persona.update({
+        const updatedPersona = await models.Persona.update({
           docType,
           docNumber,
           firstName,
@@ -27,17 +27,24 @@ export const Mutation = {
           where:{ id },
           returning: true
         })
-        return updatedModel[1][0]
+        return updatedPersona[1][0]
       }
-      return models.Persona.create({
-        docType,
-        docNumber,
-        firstName,
-        lastName,
-        compName,
-        email,
-        address,
-        phoneNumber
-      })
+      const createdPersona = await models.Persona.create(
+        {
+          docType,
+          docNumber,
+          firstName,
+          lastName,
+          compName,
+          email,
+          address,
+          phoneNumber
+        },
+        {
+          returning:true
+        }
+      ).catch(err => console.log(err))
+      console.log(createdPersona, 'createdModel')
+      return createdPersona
     }
   }

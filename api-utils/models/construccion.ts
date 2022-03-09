@@ -2,10 +2,6 @@ import { Sequelize, DataTypes } from 'sequelize';
 const sequelize= new Sequelize(process.env.DATABASE_URL,{})
 
 const Construccion = sequelize.define('Construccion',{
-  id:{
-    type:DataTypes.INTEGER,
-    primaryKey:true,
-  },
   floorAmount:{
     type:DataTypes.BIGINT,
     allowNull:false,
