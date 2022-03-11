@@ -1,8 +1,8 @@
-import {Sequelize} from "sequelize";
-import Persona from "./persona";
-import Predio from "./predio";
-import Terreno from "./terreno";
-import Construccion from "./construccion";
+import {Sequelize} from 'sequelize';
+import Persona from './persona';
+import Predio from './predio';
+import Terreno from './terreno';
+import Construccion from './construccion';
 
 const sequelize = new Sequelize(process.env.DATABASE_URL,{
   dialect:'postgres',

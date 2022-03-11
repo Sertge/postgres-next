@@ -23,7 +23,7 @@ const Terreno = sequelize.define('Terreno',{
   urbanOrRural:{
     type:DataTypes.ENUM,
     allowNull:false,
-    values:["Urbano","Rural"]
+    values:['Urbano','Rural']
   },
   hasConstructions:{
     type:DataTypes.BOOLEAN,

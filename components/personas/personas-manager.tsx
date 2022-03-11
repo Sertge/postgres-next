@@ -1,10 +1,10 @@
-import "antd/dist/antd.css";
+import 'antd/dist/antd.css';
 import Link from 'next/link'
-import { Table, Button, Space } from "antd";
-import { useRouter } from "next/router";
-import { gql, useQuery } from "@apollo/client";
-import { useEffect } from "react";
-import { ColumnsType } from "antd/lib/table";
+import { Table, Button, Space } from 'antd';
+import { useRouter } from 'next/router';
+import { gql, useQuery } from '@apollo/client';
+import { useEffect } from 'react';
+import { ColumnsType } from 'antd/lib/table';
 
 const personasQuery = gql`
   query {
@@ -56,7 +56,7 @@ const PersonasManagerComponent= ()=>{
 
   return (
     <>
-      <Button type="primary" href='persona-edit'>Agregar una persona</Button>
+      <Button type='primary' href='persona-edit'>Agregar una persona</Button>
       {data
         ?<Table columns={columns} dataSource={data.personas}/>
         :<div>Loading...</div>

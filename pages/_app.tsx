@@ -1,5 +1,5 @@
-import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "apollo/client";
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from 'apollo/client';
 
 function App({ Component, pageProps }){
   const apolloClient = useApollo(pageProps.initialApolloState)

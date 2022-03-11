@@ -1,11 +1,11 @@
-import PageContainer from "components/common/page-container";
-import CommonHeader from "components/common/common-header";
-import "antd/dist/antd.css";
-import { Table,Button, Space } from "antd";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { gql, useQuery } from "@apollo/client";
-import { useEffect } from "react";
+import PageContainer from 'components/common/page-container';
+import CommonHeader from 'components/common/common-header';
+import 'antd/dist/antd.css';
+import { Table,Button, Space } from 'antd';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { gql, useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
 const prediosQuery = gql`
   query predios {
@@ -52,7 +52,7 @@ const PrediosManagerPage = ()=>{
     <PageContainer>
       <div>
         <CommonHeader/>
-        <Button type="primary" href='edit-predio'>Agregar un predio</Button>
+        <Button type='primary' href='edit-predio'>Agregar un predio</Button>
         <div>
           {data
             ?<Table dataSource={data.predios} columns={columns}/>

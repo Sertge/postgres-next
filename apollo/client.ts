@@ -1,6 +1,6 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client"
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 import merge from 'deepmerge'
-import { useMemo } from "react"
+import { useMemo } from 'react'
 
 let apolloClient
 

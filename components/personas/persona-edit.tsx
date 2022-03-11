@@ -1,10 +1,10 @@
-import "antd/dist/antd.css";
+import 'antd/dist/antd.css';
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import { Button,Form, FormProps, Input,Select, InputNumber } from "antd";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect, useRef } from "react";
-// import { useState } from "react";
+import { Button,Form, FormProps, Input,Select, InputNumber } from 'antd';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { useEffect, useRef } from 'react';
+// import { useState } from 'react';
 
 type FormFields= {
   docNumber: number
@@ -87,20 +87,20 @@ const PersonaEditorComponent = ()=>{
   return (
     <>
       <Form onFinish={updateFields} initialValues={data?.persona} {...formProps} ref={form}>
-        <Form.Item label="Nombres" name="firstName"><Input/></Form.Item>
-        <Form.Item label="Apellidos" name="lastName"><Input/></Form.Item>
-        <Form.Item label="Tipo de documento" name="docType">
+        <Form.Item label='Nombres' name='firstName'><Input/></Form.Item>
+        <Form.Item label='Apellidos' name='lastName'><Input/></Form.Item>
+        <Form.Item label='Tipo de documento' name='docType'>
           <Select>
-            <Select.Option value="CC">Cédula de ciudadanía</Select.Option>
-            <Select.Option value="NIT">NIT</Select.Option>
+            <Select.Option value='CC'>Cédula de ciudadanía</Select.Option>
+            <Select.Option value='NIT'>NIT</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label="Numero de documento" name="docNumber"><InputNumber/></Form.Item>
-        <Form.Item label="Razón social" name="compName"><Input/></Form.Item>
-        <Form.Item label="Correo electrónico" name="email"><Input/></Form.Item>
-        <Form.Item label="Dirección" name="address"><Input/></Form.Item>
-        <Form.Item label="Teléfono" name="phoneNumber" ><InputNumber/></Form.Item>
-        <Form.Item><Button type="primary" htmlType="submit">Guardar</Button><Link href='personas-manager'><a><Button>Regresar</Button></a></Link></Form.Item>
+        <Form.Item label='Numero de documento' name='docNumber'><InputNumber/></Form.Item>
+        <Form.Item label='Razón social' name='compName'><Input/></Form.Item>
+        <Form.Item label='Correo electrónico' name='email'><Input/></Form.Item>
+        <Form.Item label='Dirección' name='address'><Input/></Form.Item>
+        <Form.Item label='Teléfono' name='phoneNumber' ><InputNumber/></Form.Item>
+        <Form.Item><Button type='primary' htmlType='submit'>Guardar</Button><Link href='personas-manager'><a><Button>Regresar</Button></a></Link></Form.Item>
       </Form>
     </>
   )

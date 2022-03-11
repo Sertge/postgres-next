@@ -20,7 +20,7 @@ const Construccion = sequelize.define('Construccion',{
   constructionUse:{
     type:DataTypes.ENUM,
     allowNull:false,
-    values:["Comercial", "Residencial", "Industrial","Mixto"]
+    values:['Comercial', 'Residencial', 'Industrial','Mixto']
   },
   address:{
     type:DataTypes.STRING,

@@ -1,4 +1,4 @@
-import { Model, ModelCtor } from "sequelize/types";
+import { Model, ModelCtor } from 'sequelize/types';
 export const Query = {
     personas(
       _parent: any,
