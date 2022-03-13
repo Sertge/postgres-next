@@ -1,6 +1,6 @@
 import { Model, ModelCtor } from "sequelize/types";
 export const Mutation = {
-    async CreatePersona(_parent,args: { [key: string]: any },context: { models: { [key: string]: ModelCtor<Model<any, any>> }}){
+    async CreatePersona(_parent, args: { input: { [key: string]: any }}, context: { models: { [key: string]: ModelCtor<Model<any, any>> }}){
       const { models } = context 
       const { input: {
         id,
@@ -13,7 +13,7 @@ export const Mutation = {
         address,
         phoneNumber
       }} = args
-      if(id) {
+      if (id) {
         const updatedPersona = await models.Persona.update({
           docType,
           docNumber,
@@ -41,9 +41,43 @@ export const Mutation = {
           phoneNumber
         },
         {
-          returning:true
+          returning: true
         }
       )
       return createdPersona.toJSON()
+    },
+    async CreatePredio(_parent: any, args: { input: { [key: string]: any }}, context: { models: { [key: string]: ModelCtor<Model<any, any>> }} ) {
+      const { models } = context
+      const { input: {
+        id,
+        lotValue,
+        lotName,
+        lotDepartment,
+        lotMunicipality
+      }} = args
+      if (id) {
+        const updatedPredio = await models.Predio.update({
+          lotValue,
+          lotName,
+          lotDepartment,
+          lotMunicipality
+        }, {
+          where: { id },
+          returning: true
+        })
+        return updatedPredio[1][0]
+      }
+      const createdPredio = await models.Predio.create(
+        {
+          lotValue,
+          lotName,
+          lotDepartment,
+          lotMunicipality
+        },
+        {
+          returning: true
+        }
+      )
+      return createdPredio.toJSON()
     }
   }

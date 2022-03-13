@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 import Link from 'next/link'
-import {useRouter} from 'next/router'
-import { Button,Form, FormProps, Input,Select, InputNumber } from 'antd';
+import { useRouter } from 'next/router'
+import { Button, Form, FormProps, Input, Select, InputNumber, Space } from 'antd';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useEffect, useRef } from 'react';
 // import { useState } from 'react';
@@ -100,7 +100,11 @@ const PersonaEditorComponent = ()=>{
         <Form.Item label='Correo electrónico' name='email'><Input/></Form.Item>
         <Form.Item label='Dirección' name='address'><Input/></Form.Item>
         <Form.Item label='Teléfono' name='phoneNumber' ><InputNumber/></Form.Item>
-        <Form.Item><Button type='primary' htmlType='submit'>Guardar</Button><Link href='personas-manager'><a><Button>Regresar</Button></a></Link></Form.Item>
+        <Form.Item>
+          <Button type='primary' htmlType='submit'>Guardar</Button>
+          <Space size='small'></Space>
+          <Link href='personas-manager'><a><Button>Regresar</Button></a></Link>
+        </Form.Item>
       </Form>
     </>
   )
