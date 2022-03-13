@@ -14,7 +14,7 @@ type FormFields= {
 }
 
 const createPredioMutation = gql`
-  mutation createPredioMutation($input:PersonaInput) {
+  mutation createPredioMutation($input:PredioInput) {
     CreatePredio(input: $input) {
       id,
       lotValue,
@@ -27,7 +27,7 @@ const createPredioMutation = gql`
 
 const predioQuery = gql`
   query predioQuery($id:ID!) {
-    persona(id: $id) {
+    predio(id: $id) {
       id,
       lotValue,
       lotName,
@@ -38,7 +38,7 @@ const predioQuery = gql`
 `
 
 const formProps:FormProps={
-  name:'personaform',
+  name:'predioForm',
   autoComplete:'off',
   labelCol: { span: 5 },
   wrapperCol: { span: 16 },
@@ -52,8 +52,8 @@ const PredioEditorComponent = ()=>{
   const [predioMutation] = useMutation(createPredioMutation)
 
   useEffect(()=> {
-    if(data && data.persona) {
-      form.current.setFieldsValue(data.persona)
+    if(data && data.predio) {
+      form.current.setFieldsValue(data.predio)
     }
   },[data])
   
@@ -68,13 +68,13 @@ const PredioEditorComponent = ()=>{
       }
     })
     if (!data) throw new Error('something went wrong')
-    form.current.setFieldsValue(data.CreatePersona)
-    router.push('personas-manager')
+    form.current.setFieldsValue(data.CreatePredio)
+    router.push('predios-manager')
   }
 
   return (
     <>
-      <Form onFinish={updateFields} initialValues={data?.persona} {...formProps} ref={form}>
+      <Form onFinish={updateFields} initialValues={data?.predio} {...formProps} ref={form}>
         <Form.Item label='Nombre' name='lotName'><Input/></Form.Item>
         <Form.Item label='Departamento' name='lotDepartment'><Input/></Form.Item>
         <Form.Item label='Municipio' name='lotMunicipality'><Input/></Form.Item>
