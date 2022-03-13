@@ -43,11 +43,11 @@ const PrediosManagerComponent = ()=>{
       title: 'Acciones',
       key: 'Actions',
       render: (_text:string, record:any) => (<Space size='middle'>
-        <Link href={`edit-predio?id=${record.id}`}><a>Editar Registro</a></Link>
+        <Link href={`predio-edit?id=${record.id}`}><a>Editar Registro</a></Link>
       </Space>)
     },
     {
-      title: 'Lote',
+      title: 'Terreno',
       key: 'Land',
       render: (_text:string, record:any) => (<Space size='middle'>
         {
@@ -63,7 +63,7 @@ const PrediosManagerComponent = ()=>{
 
   return (
       <div>
-        <Button type='primary' href='edit-predio'>Agregar un predio</Button>
+        <Button type='primary' href='predio-edit'>Agregar un predio</Button>
         <div>
           {loading
             ?<div>Loading...</div>
